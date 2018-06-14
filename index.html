@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="information"></div>
+    </header>
+
+
+    <div class="container">
+        <section class="bartenders"></section>
+        <section class="menuList"></section>
+
+        <template id="barInfoTemplate">
+        <span id="barName">Bartenders</span>
+        <span id="barClosingTime">Bartenders</span>
+    </template>
+
+        <template class="bartendersTemplate">
+    <div id="bartenderBox">
+        <span id="photo">Bartenders</span>
+        <span id="name">Bartenders</span>
+        <span id="status">Bartenders</span>
+        <span id="statusDetail">Bartenders</span>
+        <span id="usingTap">Bartenders</span>
+        <span id="servingCustomer">Bartenders</span>
+    </div>
+</template>
+
+<template class="menuTemplate">
+    <div id="menuBox">
+        <h2 id="name">Name of Beer</h2>
+        <b id="alc">How much alcohol</b>
+        <b id="category">Category of beer</b>
+        <p id="beerImage">Image of beer</p>
+        <h2>Description of beer:</h2>
+        <p id="descriptionAppearance">Description appearance of beer</p>
+        <p id="descriptionAroma">Description appearance of beer</p>
+        <p id="descriptionFlavor">Description appearance of beer</p>
+        <p id="descriptionMouthfeel">Description appearance of beer</p>
+        <p id="descriptionOverallImpression">Description appearance of beer</p>
+    </div>
+</template>
+
+    </div>
+<script src="http://petlatkea.dk/2018/front/foobar.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", getData);
+    setInterval(() => {
+        console.log(myObject);
+        getData();
+        document.querySelector(".information").innerHTML = "";
+        document.querySelector(".bartenders").innerHTML = "";
+        document.querySelector(".menuList").innerHTML = "";
+        showBarInfo();
+        showBartenders();
+        showMenu();
+    }, 3000);
+    async function getData() {
+        let data = FooBar.getData();
+        myObject = JSON.parse(data);
+        showBarInfo();
+        showBartenders();
+        showMenu();
+    }
+
+    function showMenu() {
+        let menuList = myObject.beertypes;
+        menuList.forEach(listMenu => {
+            let menuTemplate = document.querySelector(".menuTemplate").content;
+            let clone = menuTemplate.cloneNode(true);
+            clone.querySelector("#name").textContent = listMenu.name;
+            clone.querySelector("#alc").textContent = "Alcohol: " + listMenu.alc + "%";
+            clone.querySelector("#category").textContent = "Category: " + listMenu.category;
+            clone.querySelector("#beerImage").innerHTML = '<img src="img/' + listMenu.label + '" alt="">';
+            clone.querySelector("#descriptionAppearance").innerHTML = "<h4>Appearance</h4>" + listMenu.description.appearance;
+            clone.querySelector("#descriptionAroma").innerHTML = "<h4>Aroma</h4>" + listMenu.description.aroma;
+            clone.querySelector("#descriptionFlavor").innerHTML = "<h4>Flavor</h4>" + listMenu.description.flavor;
+            clone.querySelector("#descriptionMouthfeel").innerHTML = "<h4>Mouth feel</h4>" + listMenu.description.mouthfeel;
+            clone.querySelector("#descriptionOverallImpression").innerHTML = "<h4>Overall Impression</h4>" + listMenu.description.overallImpression;
+            document.querySelector(".menuList").appendChild(clone);
+        })
+
+    }
+
+    function showBarInfo(data) {
+        let list = document.querySelector(".information");
+        let template = document.querySelector("#barInfoTemplate").content;
+        let clone = template.cloneNode(true);
+        let barName = clone.querySelector("#barName");
+        let barClosingTime = clone.querySelector("#barClosingTime");
+        list.appendChild(clone);
+        barName.innerHTML = myObject.bar.name;
+        barClosingTime.innerHTML = "Closing at " + myObject.bar.closingTime;
+    }
+
+
+    function showBartenders() {
+        let bartenderInfo = myObject.bartenders;
+        bartenderInfo.forEach(infoBartender => {
+            let bartendersTemplate = document.querySelector(".bartendersTemplate").content;
+            let clone = bartendersTemplate.cloneNode(true);
+            clone.querySelector("#photo").innerHTML = '<img src="img/' + infoBartender.name + '.jpg" alt="bartender photo">';
+            clone.querySelector("#name").innerHTML = "<b>Name:</b> " + infoBartender.name + "<br>";
+            clone.querySelector("#status").innerHTML = "<b>Status:</b> " + infoBartender.status + "<br>";
+            clone.querySelector("#statusDetail").innerHTML = "<b>Details:</b> " + infoBartender.statusDetail + "<br>";
+            clone.querySelector("#usingTap").innerHTML = "<b>Using tap:</b> " + infoBartender.usingTap + "<br>";
+            clone.querySelector("#servingCustomer").innerHTML = "<b>Serving customer:</b> " + infoBartender.servingCustomer + "<br>";
+            document.querySelector(".bartenders").appendChild(clone);
+        })
+
+    }
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0696D8;
+    color:white;
+
+}
+.container {
+margin: 0 10%;
+}
+#bartenderBox {
+    border: 2px solid gray;
+    width: 345px;
+    height: 150px;
+    background: white;
+    margin: 20px 10px 0 0;
+    color: black;
+    float: left;
+}
+#bartenderBox #name, #bartenderBox #status,
+#bartenderBox #statusDetail,
+#bartenderBox #usingTap,
+#bartenderBox #servingCustomer {
+    margin-left: 15px;
+    line-height: 30px;
+}
+
+
+#menuBox {
+    border-bottom: 2px solid red;
+    width: 95%;
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+#menuBox #alc {
+    float: right;
+}
+
+.bartenders {
+    display: inline-block;
+}
+
+header {
+    height: 50px;
+    width: 100%;
+    background-color: red;
+}
+
+#barName {
+    font-size: 20px;
+    margin: auto;
+    padding: auto;
+
+}
+
+#barClosingTime {
+    float:right;
+}
+
+#photo {
+    border-right: 2px solid gray;
+    float: left;
+}
+#photo img {
+    border-radius: 150px;
+    width: 146px;
+}
+  
